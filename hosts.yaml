@@ -1,8 +1,8 @@
 ---
 eu-med-as01:
-  brigade_host: 10.1.10.25
+  hostname: 10.1.10.28
   groups: ['uwaco_network']
 
 arctic-ds01-as01:
-  brigade_host: 10.1.10.26
+  hostname: 10.1.10.102
   groups: ['uwaco_network']

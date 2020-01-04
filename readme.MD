@@ -1,57 +1,57 @@
-# First Brigade Test Run
+# First Nornir (formerly nornir) Test Run
 ## Get Facts
 
 ## Summary
 
-First test with Brigade.
+First test of the network automation framework formerly known as nornir (and now known as nornir).
 
-This was my first use of Brigade.  I started out with the sample get facts run_brigade.py script from from [Patrick Ogenstad at Networklore.](https://networklore.com/introducing-brigade/)
+This was my first use of Nornir.  I started out with the sample get facts run_nornir.py script from from [Patrick Ogenstad at Networklore.](https://networklore.com/introducing-brigade/)
 
-The first_brigade.py script is my attempt to decompose the objects and resulting data structures.
+I'm fairly excited about this!  It took me about 45 minutes to get things set up on my Windows 10 system.  It took almost no time at all on my Mac.
 
-I'm fairly excited about this!  It took me about 45 minutes to get things set up on my Windows 10 system.  It took
-almost no time at all on my Mac.
+Using PyCharm on my mac the print_result output is formatted and color coded nicely.  Using PyCharm on my Windows 10 system the output is less colorful.
 
-Using PyCharm on my mac the print_result output is formatted and color coded nicely.  Using PyCharm on my Windows 10
-system the output is less colorful.
+The first_nornir.py script is my attempt to decompose the objects and resulting data structures.  It took me a while the first time and with Nornir2 it took me even longer!  It makes complete sense and these objects are highly flexible but for someone newish to Python it nearly made my head explode.  Luckily, with cranium still intact, I'm still very excited about this framework!
 
 My next Sunday afternoon project will involve generating configurations and applying them.
 
 ## Code Example
 
-Like Ansible, Brigade will leverage a set of inventory information.  Here you see a very basic groups.yaml file which
+Like Ansible, nornir will leverage inventory information.  Here you see a very basic groups.yaml file which
 can also contain a default section for more general values and a hosts.yaml file which can reference specific
 or more general group settings defined in the groups.yaml file.  These files can take any key:value pair and the values
-with the "brigade_" prefix have special meaning as you would expect.
+with the "nornir_" prefix have special meaning as you would expect.
 
 
 
 groups.yaml
 
-        ---
-        uwaco_network:
-          brigade_username: cisco
-          brigade_password: cisco
-          brigade_nos: ios
+```
+  ---
+  uwaco_network:
+    platform: ios
+    username: cisco
+    password: cisco
+```
 
 hosts.yaml
 
         ---
         eu-med-as01:
-          brigade_host: 10.1.10.25
+          nornir_host: 10.1.10.25
           groups: ['uwaco_network']
-      
+
         arctic-ds01-as01:
-          brigade_host: 10.1.10.26
+          nornir_host: 10.1.10.26
           groups: ['uwaco_network']
 
 
-The first part of the first_brigade.py script initializes a brigade objext called brg.  This reads in the host information.
+The first part of the first_nornir.py script initializes a nornir objext called brg.  This reads in the host information.
 
 The following sections attempt to deconstruct the objects into workable values like getting the keys of all the hosts.
 
 ```
-(fire-brigade3) Claudias-iMac:fire-brigade3 claudia$ **python first_brigade.py**
+(fire-nornir3) Claudias-iMac:fire-nornir3 claudia$ **python first_nornir.py**
 
 Hosts derived from the Inventory file are:      {'eu-med-as01': Host: eu-med-as01, 'arctic-ds01-as01': Host: arctic-ds01-as01}
 Groups derived from the Inventory file are:     {'uwaco_network': Group: uwaco_network}
@@ -93,7 +93,7 @@ Decomposing Result Object...
 
 ```
 
-The second section uses the brigade print_result module to print an Ansible-like status to stdout.
+The second section uses the nornir print_result module to print an Ansible-like status to stdout.
 
 
 ```
@@ -180,14 +180,14 @@ vvvv napalm_get ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
                  'uptime': 55260,
                  'vendor': 'Cisco'}}
 ^^^^ END napalm_get ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(fire-brigade3) Claudias-iMac:fire-brigade3 claudia$
+(fire-nornir3) Claudias-iMac:fire-nornir3 claudia$
 
 ```
 
 Windows 10 Output in PyCharm which does not render the color codes.
 
 ```
-(fire-brigade3) D:\Dropbox (Indigo Wire Networks)\scripts\brigade\fire-brigade3>python run_brigade.py
+(fire-nornir3) D:\Dropbox (Indigo Wire Networks)\scripts\nornir\fire-nornir3>python run_nornir.py
 ?[1m?[36mnapalm_get**********************************************************************?[0m
 ?[0m?[1m?[34m* arctic-ds01-as01 ** changed : False ******************************************?[0m
 ?[0m?[1m?[32mvvvv napalm_get ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO?[0m
@@ -271,6 +271,6 @@ Windows 10 Output in PyCharm which does not render the color codes.
                  ?[0m'vendor'?[0m: ?[0m'Cisco'?[0m}?[0m}?[0m
 ?[0m?[1m?[32m^^^^ END napalm_get ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^?[0m
 ?[0m
-(fire-brigade3) D:\Dropbox (Indigo Wire Networks)\scripts\brigade\fire-brigade3>
+(fire-nornir3) D:\Dropbox (Indigo Wire Networks)\scripts\nornir\fire-nornir3>
 
 ```
