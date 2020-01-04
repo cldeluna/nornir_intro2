@@ -1,0 +1,6 @@
+---
+uwaco_network:
+  brigade_username: cisco
+  brigade_password: cisco
+  brigade_nos: ios
+

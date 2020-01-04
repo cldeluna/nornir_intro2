@@ -1,0 +1,8 @@
+---
+eu-med-as01:
+  brigade_host: 10.1.10.25
+  groups: ['uwaco_network']
+
+arctic-ds01-as01:
+  brigade_host: 10.1.10.26
+  groups: ['uwaco_network']
