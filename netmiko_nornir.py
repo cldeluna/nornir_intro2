@@ -17,7 +17,6 @@ import argparse
 
 from nornir import InitNornir
 from nornir.plugins.tasks.networking import netmiko_send_command
-from nornir.plugins.tasks.networking import netmiko_send_command
 from nornir.plugins.functions.text import print_result
 
 
@@ -55,11 +54,12 @@ def main():
 
     result = nr.run(netmiko_send_command, command_string=show_command)
 
-    print(f"command output stored in the varialbe 'result'...")
+    print(f"command output stored in the variable 'result'...")
 
     # Printing now may help you decompose the resulting objects
     # print(result)
     # print(dir(result))
+    print_result(result)
 
     print(f"\nDecomposing Nornir Result Object of type {type(result)}...\n")
     print(result.items())

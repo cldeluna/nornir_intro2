@@ -21,7 +21,13 @@ My next Sunday afternoon project will involve [generating configurations and app
 
 ## Installation
 
-Define a virtual environment
+1. [Define a nornir virtual environment with Python3](https://realpython.com/python-virtual-environments-a-primer/).
+2. Activate your new virtual environment
+3. Install all the required modules with the pip install command as shown below
+
+```
+pip install -r requirements.txt
+```
 
 
 
@@ -42,8 +48,8 @@ Note: The scripts in the repository comment out local devices and retain [DevNet
   ---
   uwaco_network:
     platform: ios
-    username: cisco
-    password: cisco
+    username: ****
+    password: ****
   devnet_sandbox_iosxe:
     platform: ios
     username: root
@@ -557,3 +563,6 @@ vvvv napalm_get ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 
 
+## Licensing
+
+This code is licensed under the BSD 3-Clause License. See [LICENSE](https://github.com/CiscoDevNet/code-exchange-repo-template/blob/master/manual-sample-repo/LICENSE) for details.
