@@ -1,4 +1,4 @@
-git # Example from Patrick Ogenstad at Networklore
+# Example from Patrick Ogenstad at Networklore
 # Updated for nornir
 # https://networklore.com/introducing-brigade/
 from nornir import InitNornir

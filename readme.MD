@@ -17,6 +17,14 @@ Having said that, if you are not comfortable with some of these more complex dat
 
 My next Sunday afternoon project will involve [generating configurations and applying them](https://gratuitous-arp.net/configuration-creation-with-nornir/).
 
+
+
+## Installation
+
+Define a virtual environment
+
+
+
 ## Code Example
 
 Like Ansible, Nornir will leverage inventory information.  Here you see a very basic **groups.yaml** file which
@@ -26,7 +34,7 @@ can also contain a default section for more general values and a **hosts.yaml** 
 
 ### Files that set up your environment and devices
 
-Note: The scripts in the repository comment out local devices and retain DevNet Always On devices so that the scripts can be run immediately with results.  Local devices are left if for example purposes only.  The output shown below uses local devices.
+Note: The scripts in the repository comment out local devices and retain [DevNet](https://developer.cisco.com/) Always On devices so that the scripts can be run immediately with results.  Local devices are left if for example purposes only.  The output shown below uses local devices.
 
 ###### groups.yaml
 
@@ -74,6 +82,8 @@ The first part of the **first_nornir.py** script initializes a nornir object cal
 Next, we use the run method on the nr object..well..to run some commands which in this case uses napalm to get facts.
 
 The next sections of the script attempt to deconstruct the objects into workable values like getting the keys of all the hosts.
+
+##### Typical script execution output
 
 ```
 (nornir2) Claudias-iMac:nornir_intro2 claudia$ python first_nornir.py 
