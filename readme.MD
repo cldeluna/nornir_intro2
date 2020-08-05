@@ -3,30 +3,32 @@
 
 ## Summary
 
-First test of the network automation framework formerly known as brigade (and now known as nornir - not responsible for alliteration!).
+This repository accompanies my post [Nornir – A New Network Automation Framework](https://gratuitous-arp.net/nornir-a-new-network-automation-framework/) and is my first test of the network automation framework formerly known as brigade (and now known as Nornir - not responsible for alliteration!).
 
-This was my first use of Nornir.  I started out with the sample get facts run_nornir.py script from from [Patrick Ogenstad at Networklore.](https://networklore.com/introducing-brigade/)
+This was my first use of Nornir so the code has lots of comments as I figured stuff out.  I started out with the sample get facts *run\_nornir.py* script from from [Patrick Ogenstad at Networklore.](https://networklore.com/introducing-brigade/)
 
 I'm fairly excited about this!  It took me about 45 minutes to get things set up on my Windows 10 system.  It took almost no time at all on my Mac.
 
-Using PyCharm on my mac the print_result output is formatted and color coded nicely.  Using PyCharm on my Windows 10 system the output is less colorful.
+Using PyCharm on my mac the **print_result** output is formatted and color coded nicely.  Using PyCharm on my Windows 10 system the output is less colorful.
 
-The first_nornir.py script is my attempt to decompose the objects and resulting data structures.  It took me a while the first time and with Nornir2 it took me even longer!  It makes complete sense and these objects are highly flexible but for someone newish to Python it nearly made my head explode.  Luckily, with cranium still intact, I'm still very excited about this framework!   
+The ***first\_nornir.py*** script is my attempt to take the basics from Mr. Ogenstad's example script and decompose the objects and resulting data structures.  It took me a while the first time and with Nornir2 it took me even longer!  It makes complete sense and these objects are highly flexible but for someone newish to Python it nearly made my head explode.  Luckily, with cranium still intact, I'm still very excited about this framework!   
 
-Having said that if you are not comfortable with some of these more complex data structures please see [Decomposing Data Structures](https://gratuitous-arp.net/decomposing-complex-json-data-structures/) or sign up for one of [Kirk Byers](https://pynet.twb-tech.com/) Python for Network Engineers courses!
+Having said that, if you are not comfortable with some of these more complex data structures please see [Decomposing Data Structures](https://gratuitous-arp.net/decomposing-complex-json-data-structures/) or sign up for one of [Kirk Byers](https://pynet.twb-tech.com/) Python for Network Engineers courses!
 
-My next Sunday afternoon project will involve generating configurations and applying them.
+My next Sunday afternoon project will involve [generating configurations and applying them](https://gratuitous-arp.net/configuration-creation-with-nornir/).
 
 ## Code Example
 
-Like Ansible, nornir will leverage inventory information.  Here you see a very basic groups.yaml file which
-can also contain a default section for more general values and a hosts.yaml file which can reference specific
-or more general group settings defined in the groups.yaml file.  These files can take any key:value pair and the values
-with the "nornir_" prefix have special meaning as you would expect.
+Like Ansible, Nornir will leverage inventory information.  Here you see a very basic **groups.yaml** file which
+can also contain a default section for more general values and a **hosts.yaml** file which can reference specific or more general group settings defined in the groups.yaml file.  These files can take any **key:value** pair and the values with the "nornir_" prefix have special meaning as you would expect.
 
 
 
-groups.yaml
+### Files that set up your environment and devices
+
+Note: The scripts in the repository comment out local devices and retain DevNet Always On devices so that the scripts can be run immediately with results.  Local devices are left if for example purposes only.  The output shown below uses local devices.
+
+###### groups.yaml
 
 ```
   ---
@@ -34,9 +36,14 @@ groups.yaml
     platform: ios
     username: cisco
     password: cisco
+  devnet_sandbox_iosxe:
+    platform: ios
+    username: root
+    password: D_Vay!_10&
+    port: 8181   
 ```
 
-hosts.yaml
+###### hosts.yaml
 
         ---
         eu-med-as01:
@@ -46,12 +53,25 @@ hosts.yaml
         arctic-ds01-as01:
           hostname: 10.1.10.26
           groups: ['uwaco_network']
+        
+        ios-xe-mgmt:
+          hostname: ios-xe-mgmt.cisco.com
+          groups: ['devnet_sandbox_iosxe']   
 
-The first part of the **first_nornir.py** script initializes a nornir objext called nr.  This reads in the host information and the script shows how to get to some of that information.
+
+
+#### Scripts in the Repository
+
+| Script            |                                                              |
+| ----------------- | ------------------------------------------------------------ |
+| run\_nornir.py    | Sample nornir script using napalm get facts from from Patrick Ogenstad at Networklore |
+| first\_nornir.py  | Building on Patrick Ogenstad run_nornir.py script, this script works through understanding the returned objects and structured data. |
+| netmiko_nornir.py | Now that we are little familiar with the basics of Nornir, let's use Nornir with Netmiko to get the output of specific commands rather than the structured data returned by Napalm facts. |
+
+
+The first part of the **first_nornir.py** script initializes a nornir object called **nr**.  This reads in the host information and the script shows how to get to some of that information.
 
 Next, we use the run method on the nr object..well..to run some commands which in this case uses napalm to get facts.
-
-
 
 The next sections of the script attempt to deconstruct the objects into workable values like getting the keys of all the hosts.
 
@@ -122,7 +142,7 @@ Lastly, we use the built in **print_result** command to print the resulting outp
 
 You may want to do this earlier because this will help you understand the data structure.
 
-Example of the nornir print_result module which prints an Ansible-like status to stdout.
+Example of the nornir **print_result** module which prints an Ansible-like status to stdout.
 
 
 ```
@@ -524,4 +544,6 @@ vvvv napalm_get ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 
 ```
+
+
 

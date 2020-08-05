@@ -1,5 +1,16 @@
 ---
-uwaco_network:
+#uwaco_network:
+#  platform: ios
+#  username: cisco
+#  password: cisco
+
+devnet_sandbox_iosxe:
   platform: ios
-  username: cisco
-  password: cisco
+  username: root
+  password: D_Vay!_10&
+  port: 8181
+
+#devnet_sandbox_nxos:
+#  platform: nxos
+#  username: admin
+#  password: Admin_1234!

@@ -1,8 +1,13 @@
 ---
-eu-med-as01:
-  hostname: 10.1.10.28
-  groups: ['uwaco_network']
+#eu-med-as01:
+#  hostname: 10.1.10.28
+#  groups: ['uwaco_network']
+#
+#arctic-ds01-as01:
+#  hostname: 10.1.10.102
+#  groups: ['uwaco_network']
 
-arctic-ds01-as01:
-  hostname: 10.1.10.102
-  groups: ['uwaco_network']
+
+ios-xe-mgmt:
+  hostname: ios-xe-mgmt.cisco.com
+  groups: ['devnet_sandbox_iosxe']
