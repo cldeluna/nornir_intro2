@@ -1,5 +1,5 @@
 # First Nornir (formerly brigade) Test Run
-## Get Facts
+## Using Napalm Get Facts
 
 ## Summary
 
@@ -35,8 +35,6 @@ pip install -r requirements.txt
 
 Like Ansible, Nornir will leverage inventory information.  Here you see a very basic **groups.yaml** file which
 can also contain a default section for more general values and a **hosts.yaml** file which can reference specific or more general group settings defined in the groups.yaml file.  These files can take any **key:value** pair and the values with the "nornir_" prefix have special meaning as you would expect.
-
-
 
 ### Files that set up your environment and devices
 
