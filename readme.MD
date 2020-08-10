@@ -76,7 +76,7 @@ Note: The scripts in the repository comment out local devices and retain [DevNet
 | run\_nornir.py            | Sample nornir script using napalm get facts from from Patrick Ogenstad at Networklore |
 | first\_nornir.py          | Building on Patrick Ogenstad run_nornir.py script, this script works through understanding the returned objects and structured data. |
 | netmiko_nornir.py         | Now that we are little familiar with the basics of Nornir, let's use Nornir with Netmiko to get the output of specific commands rather than the structured data returned by Napalm facts. |
-| first_nornir_env_creds.py | This script is basically a copy of first_nornir.py but showing how environment variables can be used instead of hardcoding the credentials into the groups.yaml file.  Many thanks to Chris Crook ([@ctopher78](https://twitter.com/ctopher78)) for getting it started.  For a full discussion of this new credentials strategy see [Managing Credentials and Keys More Securely in Python for Network Engineers](https://gratuitous-arp.net/managing-credentials-and-keys-more-securely-in-python-for-network-engineers/) |
+| first_nornir_env_creds.py | This script is basically a copy of first_nornir.py but showing how environment variables can be used instead of hardcoding the credentials into the groups.yaml file.  Many thanks to Chris Crook ([@ctopher78](https://twitter.com/ctopher78)) for getting it started.  For a full discussion of this new credentials strategy see [How Network Engineers Can Manage Credentials and Keys More Securely in Python](https://gratuitous-arp.net/managing-credentials-and-keys-more-securely-in-python-for-network-engineers/) |
 
 #### first_nornir.py
 
