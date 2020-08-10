@@ -1,6 +1,6 @@
 #!/usr/bin/python -tt
 # Project: Dropbox (Indigo Wire Networks)
-# Filename: first_brigade
+# Filename: first_nornir_env_creds
 # claudia
 # PyCharm
 # Python3
@@ -12,9 +12,13 @@ __copyright__ = "Copyright (c) 2018 Claudia"
 __license__ = "Python"
 
 import argparse
-
+import warnings
+# This disables warnings
+# InsecureRequestWarning: Unverified HTTPS request is being made to host 'sbx-nxos-mgmt.cisco.com'
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_command
+# This script only uses napalm get facts so there is no need to import the netmiko_send_command
+# from nornir.plugins.tasks.networking import netmiko_send_command
 from nornir.plugins.tasks.networking import napalm_get
 from nornir.plugins.functions.text import print_result
 
@@ -46,15 +50,15 @@ def main():
 
     print("\n")
 
+    # Like Ansible, Nornir will execute the run instructions on all the devices defined in the environment
     print(f"Logging into hosts in inventory and getting napalm facts...")
     result = nr.run(
         napalm_get,
         getters=['get_facts'])
 
-    print(f"napalm facts stored in the varialbe 'result'...")
-
+    print(f"napalm facts stored in the variable 'result'...")
     # Printing now may help you decompose the resulting objects
-    # print_result(result)
+    print_result(result)
 
 
     print(f"\nDecomposing Nornir Result Object of type {type(result)}...\n")
@@ -87,7 +91,7 @@ def main():
 # Standard call to the main() function.
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="First Brigade Script - Discovery",
-                                     epilog="Usage: ' python first_brigade.py' ")
+                                     epilog="Usage: ' python first_nornir_env_creds.py' ")
 
     arguments = parser.parse_args()
     main()

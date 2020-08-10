@@ -85,7 +85,7 @@ def set_creds(self, prefix="None", context="default"):
     # Print current environment variables
     # print(os.environ)
 
-    print(f"\n============= Setting Credentials for {self} =============")
+    print(f"\n============= Setting Credentials for {self} with context {context} =============")
     print(f"Username from env var is: {username}")
     print(f"Password from env var is: {password}\n")
 

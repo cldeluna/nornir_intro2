@@ -13,8 +13,10 @@ __copyright__ = "Copyright (c) 2018 Claudia"
 __license__ = "Python"
 
 import argparse
-import argparse
-
+import warnings
+# This disables warnings
+# InsecureRequestWarning: Unverified HTTPS request is being made to host 'sbx-nxos-mgmt.cisco.com'
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 from nornir import InitNornir
 from nornir.plugins.tasks.networking import netmiko_send_command
 from nornir.plugins.functions.text import print_result
@@ -80,8 +82,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Script Description",
                                      epilog="Usage: ' python netmiko_nornir' ")
 
-    #parser.add_argument('all', help='Execute all exercises in week 4 assignment')
-    parser.add_argument('-a', '--all', help='Execute all exercises in week 4 assignment', action='store_true',
-                        default=False)
     arguments = parser.parse_args()
     main()
