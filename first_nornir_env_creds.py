@@ -1,10 +1,9 @@
 #!/usr/bin/python -tt
 # Project: nornir_intro2
-# Filename: env_creds
+# Filename: first_nornir_env_creds
 # claudia
 # PyCharm
 
-from __future__ import absolute_import, division, print_function
 
 __author__ = "Claudia de Luna (claudia@indigowire.net)"
 __version__ = ": 1.0 $"
@@ -20,7 +19,7 @@ import warnings
 # InsecureRequestWarning: Unverified HTTPS request is being made to host 'sbx-nxos-mgmt.cisco.com'
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_command
+# from nornir.plugins.tasks.networking import netmiko_send_command
 from nornir.plugins.tasks.networking import napalm_get
 from nornir.plugins.functions.text import print_result
 
@@ -32,9 +31,17 @@ from nornir.plugins.functions.text import print_result
 # unset NETPASS
 
 def set_env(desc="Username", debug=True):
-
+    """
+    This script sets an environment variable with a name provided via the CLI and the value provided by the CLI.
+    No validation checking is done.
+    This is the Python equivalent of executing an export command in your systems BASH (or other CLI) shell
+    export NETPASS=cisco
+    :param desc: Cosmetic note used to provide a hint in the input statement as to what this environment
+    variable is. Defaults to "Username"
+    :param debug:  Boolean optional parameter. When set to True, the function will print output to STDOut.
+    :return:
+    """
     env_var = input(f"\nPlease enter {desc} environment variable name:\n")
-
     env_var_value = input(f"Please enter {desc} environment variable value:\n")
 
     os.environ[env_var] = env_var_value
@@ -43,9 +50,10 @@ def set_env(desc="Username", debug=True):
         print(f'{env_var}={os.environ[env_var]} environment variable has been set.\n')
 
 
-def set_creds(self, prefix="None", context="default"):
+def set_creds(self, prefix="ENVVAR", context="default"):
     """ Check for username and password env vars first.  If those
-    don't exist, then prompt user for creds.
+    don't exist, then prompt user for creds and set the values in Nornir, in the appropriate context
+    This function is specific to setting username and password with names in a specific format.
     CREDIT: Chris Crook ([@ctopher78](https://twitter.com/ctopher78)) Posted to Nornir Slack Channel Oct 18, 2019
     Note: "self" is the Nornir object for which we are setting credentials
     The context will define the object level:
@@ -58,11 +66,14 @@ def set_creds(self, prefix="None", context="default"):
     <Uppercase group or device name>_PWD
 
     """
-
+    # Set boolean values to False
+    # These will be used to determine if the specified environment variables are already set
     username_is_set = False
     password_is_set = False
 
+    # Define the environment variable names we will search for
     if context=="default":
+        # These default environment variable names are arbitrary
         usr = "NETUSER"
         pwd = "NETPASS"
         if self.inventory.defaults.username:
@@ -74,11 +85,13 @@ def set_creds(self, prefix="None", context="default"):
         usr = f"{prefix.upper()}_USR"
         pwd = f"{prefix.upper()}_PWD"
 
+        # Set booleans to True if the object passed into the function has username and password already set
         if self.username:
             username_is_set = True
         if self.password:
             password_is_set = True
 
+    # Try to get the username and password variables from the environment (see if they are set)
     username = os.environ.get(usr)
     password = os.environ.get(pwd)
 
@@ -89,6 +102,11 @@ def set_creds(self, prefix="None", context="default"):
     print(f"Username from env var is: {username}")
     print(f"Password from env var is: {password}\n")
 
+    # If username (from environment variable) and username_is set are both False, that means that the
+    # environment variable is not set nor is the username set (say via the groups.yaml file) so the topology
+    # currently has no username to use on devices in this context.
+    # Lets request the username from the command line
+    # Note:  The username is not set as an environment variable but rather the appropriate Nornir context values are set
     if not username and not username_is_set:
         uname = input(
             f"\nPlease enter username (or set `export {usr}=<your_username>` to avoid this message): "
@@ -97,6 +115,7 @@ def set_creds(self, prefix="None", context="default"):
     else:
         print(f"\n\tUsername set via environmental variable {usr} ")
 
+    # Prompt for password (as with username) using the same logic.
     if not password and not password_is_set:
         pwd = getpass.getpass(
             f"\nPlease enter password (or set `export {pwd}=<your_password>` to avoid this message): "
@@ -106,6 +125,7 @@ def set_creds(self, prefix="None", context="default"):
     else:
         print(f"\n\tPassword set via environmental variable {pwd} ")
 
+    # Set the Nornir values in the appropriate context
     if context=="default":
         self.inventory.defaults.username = username
         self.inventory.defaults.password = password
@@ -124,10 +144,12 @@ def main():
         set_env(desc="Username")
         set_env(desc="Password")
 
+    # This function will check to make sure credentials have been set either via environment variables or via
+    # the topology YAML files.
     set_creds(nr)
     # print(dir(nr))
-    # print(dir(nr.inventory))
-    # print(dir(nr.inventory.defaults))
+    print("Hosts derived from the Inventory file are: \t{}".format(nr.inventory.hosts))
+    print("Groups derived from the Inventory file are: \t{}".format(nr.inventory.groups))
 
     print("\nDecomposing Groups...")
     my_groups = nr.inventory.groups

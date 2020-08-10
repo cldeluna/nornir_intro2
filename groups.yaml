@@ -1,6 +1,6 @@
 ---
 # IMPORTANT:  Putting credentials in a file is a bad practice and is only done here to ease getting started quickly
-# In the next installment of this series we will look at putting usernames and passwords in environment variables
+# Look at the first_nornir_env_creds.py script for an alternative using environment variables
 
 # Local Lab Devices
 #uwaco_network:
@@ -19,6 +19,9 @@ devnet_sandbox_iosxe:
 #
 devnet_sandbox_nxos:
   platform: nxos
+  # For use with Netmiko script. Uncomment port 8181 and comment out port 443 (used for NXOS API)
+#  port: 8181
+  # For use with first Nornir (napalm getter) script which uses NXOS API to communicate with NXOS platforms
   port: 443
   # Comment out for production or to test using environment variables to store passwords or real time
   # (during script execution) password entry in CLI

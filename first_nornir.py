@@ -1,6 +1,6 @@
 #!/usr/bin/python -tt
-# Project: Dropbox (Indigo Wire Networks)
-# Filename: first_nornir_env_creds
+# Project: nornir_intro2
+# Filename: first_nornir
 # claudia
 # PyCharm
 # Python3
@@ -67,22 +67,25 @@ def main():
         print(f"Iterating through result object of type{type(result[i])} for item {i}")
 
         print(f"\tGet the top level key(s) for the device:")
-        top_result_keys = result[i].result.keys()
-        print(f"\t{top_result_keys}")
-        # Example output: dict_keys(['get_facts'])
+        # Make sure there result is a dict
+        if type(result[i].result) == dict:
+            top_result_keys = result[i].result.keys()
+            print(f"\t{top_result_keys}")
+            # Example output: dict_keys(['get_facts'])
 
-        print(f"\n\tGet the next level of key(s):")
-        next_keys = result[i].result['get_facts'].keys()
-        print(f"\t{next_keys}")
-        # Example output: dict_keys(['uptime', 'vendor', 'os_version', 'serial_number', 'model', 'hostname', 'fqdn', 'interface_list'])
+            print(f"\n\tGet the next level of key(s):")
+            next_keys = result[i].result['get_facts'].keys()
+            print(f"\t{next_keys}")
+            # Example output: dict_keys(['uptime', 'vendor', 'os_version', 'serial_number', 'model', 'hostname', 'fqdn', 'interface_list'])
 
-        # Iterate through the keys and values
-        print(f"\tDecomposing Result Object for hostname {i}...")
-        for k in next_keys :
-            print(f"\t\tKey {k} \t has Value: {result[i].result['get_facts'][k]}")
+            # Iterate through the keys and values
+            print(f"\tDecomposing Result Object for hostname {i}...")
+            for k in next_keys :
+                print(f"\t\tKey {k} \t has Value: {result[i].result['get_facts'][k]}")
 
-        print("\n")
-
+            print("\n")
+        else:
+            print(f"\n\tERROR! DevNet Sandbox devices may be too busy.  Try script again.")
     print(f"\nPrint run results with the print_result module."
            "\nThis is a built-in Ansible like run status that will format the output for easy viewing...")
     print_result(result)

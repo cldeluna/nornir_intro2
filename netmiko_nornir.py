@@ -13,6 +13,7 @@ __copyright__ = "Copyright (c) 2018 Claudia"
 __license__ = "Python"
 
 import argparse
+import time
 import warnings
 # This disables warnings
 # InsecureRequestWarning: Unverified HTTPS request is being made to host 'sbx-nxos-mgmt.cisco.com'
@@ -48,19 +49,17 @@ def main():
     print("Host keys = {} of type {} ".format(host_keys, type(host_keys)))
     for i in host_keys:
         print(f"- {i}")
-
     print("\n")
 
     show_command = 'show ip route'
     print(f"Logging into hosts in inventory and executing show command...")
-
+    print(f"WARNING: netmiko uses ssh, but the current group.yaml sets the port for the NX-OS device to the API port."
+          f"\nIf you see an ssh error in your results, edit your groups.yaml file and "
+          f"\ncomment out the API port and uncomment the SSH port for the device")
+    time.sleep(3)
     result = nr.run(netmiko_send_command, command_string=show_command)
 
-    print(f"command output stored in the variable 'result'...")
-
-    # Printing now may help you decompose the resulting objects
-    # print(result)
-    # print(dir(result))
+    print(f"\ncommand output stored in the variable 'result'...")
     print_result(result)
 
     print(f"\nDecomposing Nornir Result Object of type {type(result)}...\n")
