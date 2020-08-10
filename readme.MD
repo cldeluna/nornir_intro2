@@ -33,12 +33,11 @@ pip install -r requirements.txt
 
 ## Code Example
 
-Like Ansible, Nornir will leverage inventory information.  Here you see a very basic **groups.yaml** file which
-can also contain a default section for more general values and a **hosts.yaml** file which can reference specific or more general group settings defined in the groups.yaml file.  These files can take any **key:value** pair and the values with the "nornir_" prefix have special meaning as you would expect.
+Like Ansible, Nornir will leverage inventory information.  Here you see a very basic **groups.yaml** file which can also contain a default section for more general values and a **hosts.yaml** file which can reference specific or more general group settings defined in the groups.yaml file.  These files can take any **key:value** pair and the values with the "nornir_" prefix have special meaning as you would expect.
 
 ### Files that set up your environment and devices
 
-Note: The scripts in the repository comment out local devices and retain [DevNet](https://developer.cisco.com/) Always On devices so that the scripts can be run immediately with results.  Local devices are left if for example purposes only.  The output shown below uses local devices.
+Note: The scripts in the repository comment out local devices and retain [DevNet](https://developer.cisco.com/) Always On devices so that the scripts can be run immediately with results.  Local devices are left in for example purposes only.  The output shown below uses local devices.
 
 ###### groups.yaml
 
@@ -74,12 +73,14 @@ Note: The scripts in the repository comment out local devices and retain [DevNet
 
 #### Scripts in the Repository
 
-| Script            |                                                              |
-| ----------------- | ------------------------------------------------------------ |
-| run\_nornir.py    | Sample nornir script using napalm get facts from from Patrick Ogenstad at Networklore |
-| first\_nornir.py  | Building on Patrick Ogenstad run_nornir.py script, this script works through understanding the returned objects and structured data. |
-| netmiko_nornir.py | Now that we are little familiar with the basics of Nornir, let's use Nornir with Netmiko to get the output of specific commands rather than the structured data returned by Napalm facts. |
+| Script                    |                                                              |
+| ------------------------- | ------------------------------------------------------------ |
+| run\_nornir.py            | Sample nornir script using napalm get facts from from Patrick Ogenstad at Networklore |
+| first\_nornir.py          | Building on Patrick Ogenstad run_nornir.py script, this script works through understanding the returned objects and structured data. |
+| netmiko_nornir.py         | Now that we are little familiar with the basics of Nornir, let's use Nornir with Netmiko to get the output of specific commands rather than the structured data returned by Napalm facts. |
+| first_nornir_env_creds.py | This script is basically a copy of first_nornir.py but showing how environment variables can be used instead of hardcoding the credentials into the groups.yaml file.  Many thanks to Chris Crook ([@ctopher78](https://twitter.com/ctopher78)) for getting it started.  For a full discussion of this new credentials strategy see [Managing Credentials and Keys More Securely in Python for Network Engineers](https://github.com/cldeluna/creds_in_env) |
 
+#### first_nornir.py
 
 The first part of the **first_nornir.py** script initializes a nornir object called **nr**.  This reads in the host information and the script shows how to get to some of that information.
 
@@ -564,3 +565,4 @@ vvvv napalm_get ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 ## Licensing
 
 This code is licensed under the BSD 3-Clause License. See [LICENSE](https://github.com/CiscoDevNet/code-exchange-repo-template/blob/master/manual-sample-repo/LICENSE) for details.
+
