@@ -7,7 +7,7 @@
 
 __author__ = "Claudia de Luna (claudia@indigowire.net)"
 __version__ = ": 1.0 $"
-__date__ = "5/7/18"
+__date__ = "5/7/20"
 __copyright__ = "Copyright (c) 2018 Claudia"
 __license__ = "Python"
 
