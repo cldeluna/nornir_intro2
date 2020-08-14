@@ -1,4 +1,6 @@
 # First Nornir (formerly brigade) Test Run
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/cldeluna/nornir_intro2)
+
 ## Summary
 
 This repository accompanies my post [Nornir – A New Network Automation Framework](https://gratuitous-arp.net/nornir-a-new-network-automation-framework/) and is my first test of the network automation framework formerly known as brigade (and now known as [Nornir](https://pypi.org/project/nornir/) - not responsible for alliteration!) but updated for the latest version.
