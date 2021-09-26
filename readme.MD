@@ -3,9 +3,9 @@
 
 ## Summary
 
-This repository accompanies my post [Nornir – A New Network Automation Framework](https://gratuitous-arp.net/nornir-a-new-network-automation-framework/) and is my first test of the network automation framework formerly known as brigade (and now known as [Nornir](https://pypi.org/project/nornir/) - not responsible for alliteration!) but updated for the latest version.
+This repository accompanies my post [Nornir – A New Network Automation Framework](https://gratuitous-arp.net/nornir-a-new-network-automation-framework/) and is my first test of the network automation framework formerly known as brigade (and now known as [Nornir](https://pypi.org/project/nornir/) - not responsible for alliteration!) but updated (again) for version3 and the move to a more modular plugin architecture.
 
-This was my first use of Nornir so the code has lots of comments as I figured stuff out.  I started out with the sample get facts *run\_nornir.py* script from from [Patrick Ogenstad at Networklore.](https://networklore.com/introducing-brigade/)
+The original version of this repository back in 2018 was my first use of Nornir so the code has lots of comments as I figured stuff out.  I started out with the sample get facts *run\_nornir.py* script from from [Patrick Ogenstad at Networklore.](https://networklore.com/introducing-brigade/)
 
 I'm fairly excited about this!  It took me about 45 minutes to get things set up on my Windows 10 system.  It took almost no time at all on my Mac.
 
@@ -26,8 +26,29 @@ My next Sunday afternoon project will involve [generating configurations and app
 3. Install all the required modules with the pip install command as shown below
 
 ```
-pip install -r requirements.txt
+% python3 -m venv nornir38
+% source ~/vEnvs/nornir38/bin/activate
+% pip install -r requirements.txt
 ```
+
+
+
+#### Nornir3 
+
+With version 3 of Nornir, the project underwent a restructuring not unlike the restructuring of Ansible 2.10.
+
+In short, now assembly IS required with nornir3.  Nornir core will have some basic modules but to achieve the full functionality you used to have with nornir2 additional modules or "plugins" now need to be specifically installed.
+
+Here are the common ones used int his repository:
+
+```
+# Updated to new Plugin module format
+from nornir_utils.plugins.functions import print_result # pip install nornir_utils
+from nornir_napalm.plugins.tasks import napalm_get # pip install nornir_napalm
+from nornir_netmiko.tasks import netmiko_send_command # pip install nornir_netmiko
+```
+
+*Remember to install the relevant plugin you will use for your scripts.*
 
 
 
@@ -37,27 +58,21 @@ Like Ansible, Nornir will leverage inventory information.  Here you see a very b
 
 ### Files that set up your environment and devices
 
-Note: The scripts in the repository comment out local devices and retain the [DevNet](https://developer.cisco.com/) Always On IOS-XE and NX-OS devices so that the scripts can be run immediately with results (unless DevNet is undergoing maintenance).  Local devices are left in for example purposes only.  The output shown below includes output from local devices.
+Note: The scripts in the repository comment out local devices and retain the [DevNet](https://developer.cisco.com/) Always On IOS-XE device so that the scripts can be run immediately with results (unless DevNet is undergoing maintenance).  Local devices are left in for example purposes only.  The output shown below includes output from local devices.
 
 ###### groups.yaml
 
 ```
   ---
 # DevNet Always On Sandbox Devices
-devnet_sandbox_iosxe:
+sandbox-iosxe-latest-1:
+  hostname: sandbox-iosxe-latest-1.cisco.com
   platform: ios
-  port: 8181
-  username: root
-  password: D_Vay!_10&
-#
-devnet_sandbox_nxos:
-  platform: nxos
-  # For use with Netmiko script. Uncomment port 8181 and comment out port 443 (used for NXOS API)
-  # port: 8181
-  # For use with first Nornir (napalm getter) script which uses NXOS API to communicate with NXOS platforms
-  port: 443
-  username: admin
-  password: Admin_1234!
+  port: 22
+  # Comment out credentials for production or to test using environment variables to 
+  # store passwords or real time (during script execution) password entry in CLI
+  username: developer
+  password: C1sco12345
 
 ```
 
@@ -65,13 +80,9 @@ devnet_sandbox_nxos:
 
      ---
     # DevNet Always On Sandbox Devices
-    ios-xe-mgmt:
-      hostname: ios-xe-mgmt.cisco.com
-      groups: ['devnet_sandbox_iosxe']
-     
-    sbx-nxos-mgmt:
-      hostname: sbx-nxos-mgmt.cisco.com
-      groups: ['devnet_sandbox_nxos']
+    sandbox-iosxe-latest-1:
+      hostname: sandbox-iosxe-latest-1.cisco.com
+      groups: ['sandbox-iosxe-latest-1']
 
 
 
