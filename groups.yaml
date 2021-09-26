@@ -13,8 +13,8 @@ sandbox-iosxe-latest-1:
   hostname: sandbox-iosxe-latest-1.cisco.com
   platform: ios
   port: 22
-  # Comment out for production or to test using environment variables to store passwords or real time
-  # (during script execution) password entry in CLI
+  # Comment out credentials for production or to test using environment variables to
+  # store passwords or real time (during script execution) password entry in CLI
   username: developer
   password: C1sco12345
 
@@ -26,7 +26,7 @@ sandbox-iosxe-recomm-1:
   port: 22
   # For use with first Nornir (napalm getter) script which uses NXOS API to communicate with NXOS platforms
   # port: 443
-  # Comment out for production or to test using environment variables to store passwords or real time
-  # (during script execution) password entry in CLI
+  # Comment out credentials for production or to test using environment variables to
+  # store passwords or real time (during script execution) password entry in CLI
   username: developer
   password: C1sco12345
