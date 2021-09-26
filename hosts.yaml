@@ -14,10 +14,10 @@
 #  groups: ['uwaco_network']
 
 # DevNet Always On Sandbox Devices
-ios-xe-mgmt:
-  hostname: ios-xe-mgmt.cisco.com
-  groups: ['devnet_sandbox_iosxe']
+sandbox-iosxe-latest-1:
+  hostname: sandbox-iosxe-latest-1.cisco.com
+  groups: ['sandbox-iosxe-latest-1']
 #
-sbx-nxos-mgmt:
-  hostname: sbx-nxos-mgmt.cisco.com
-  groups: ['devnet_sandbox_nxos']
+sandbox-iosxe-recomm-1:
+  hostname: sandbox-iosxe-recomm-1.cisco.com
+  groups: ['sandbox-iosxe-recomm-1']

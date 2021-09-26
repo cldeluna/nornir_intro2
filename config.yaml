@@ -1,9 +1,13 @@
 ---
-core:
-  num_workers: 100
+# This has been updated to the new Nornir3 syntax and structure
+runners:
+    plugin: threaded
+    options:
+        num_workers: 100
 
+# Note the shorter plugin name. SimpleInventory is part of Nornir Core and so does not need any plugin installation
 inventory:
-  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  plugin: SimpleInventory
   options:
     host_file: "hosts.yaml"
     group_file: "groups.yaml"
