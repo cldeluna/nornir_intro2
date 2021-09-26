@@ -18,6 +18,6 @@ sandbox-iosxe-latest-1:
   hostname: sandbox-iosxe-latest-1.cisco.com
   groups: ['sandbox-iosxe-latest-1']
 #
-sandbox-iosxe-recomm-1:
-  hostname: sandbox-iosxe-recomm-1.cisco.com
-  groups: ['sandbox-iosxe-recomm-1']
+#sandbox-iosxe-recomm-1:
+#  hostname: sandbox-iosxe-recomm-1.cisco.com
+#  groups: ['sandbox-iosxe-recomm-1']

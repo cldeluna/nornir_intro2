@@ -20,6 +20,7 @@ sandbox-iosxe-latest-1:
 
 #
 sandbox-iosxe-recomm-1:
+  hostname: sandbox-iosxe-recomm-1.cisco.com
   platform: ios
   # For use with Netmiko script. Uncomment port 8181 and comment out port 443 (used for NXOS API)
   port: 22
