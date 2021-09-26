@@ -19,9 +19,10 @@ import warnings
 # InsecureRequestWarning: Unverified HTTPS request is being made to host 'sbx-nxos-mgmt.cisco.com'
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 from nornir import InitNornir
-# from nornir.plugins.tasks.networking import netmiko_send_command
-from nornir.plugins.tasks.networking import napalm_get
-from nornir.plugins.functions.text import print_result
+# from nornir_netmiko.tasks import netmiko_send_command
+# Updated to new Plugin module format
+from nornir_utils.plugins.functions import print_result
+from nornir_napalm.plugins.tasks import napalm_get
 
 # nornir will pick up NAPALM_USERNAME and NAPALM_PASSWORD environment variable
 # export NETUSER=cisco
