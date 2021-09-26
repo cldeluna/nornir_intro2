@@ -18,10 +18,13 @@ import warnings
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 from nornir import InitNornir
 # This script only uses napalm get facts so there is no need to import the netmiko_send_command
-# from nornir.plugins.tasks.networking import netmiko_send_command
-from nornir.plugins.tasks.networking import napalm_get
-from nornir.plugins.functions.text import print_result
+# from nornir_netmiko.plugins.tasks.networking import netmiko_send_command
+# from nornir_utils.plugins.tasks.networking import napalm_get
+# from nornir_napalm.plugins.functions.text import print_result
 
+from nornir import InitNornir
+from nornir_utils.plugins.functions import print_result
+from nornir_napalm.plugins.tasks import napalm_get
 
 def main():
 
